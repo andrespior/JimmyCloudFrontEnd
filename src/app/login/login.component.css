@@ -1,0 +1,21 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, #3f51b5, #5c6bc0);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  background-color: #fff;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 20px;
+}

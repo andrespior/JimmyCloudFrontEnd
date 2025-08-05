@@ -1,0 +1,51 @@
+<div class="header">
+  <h2 class="title">Archivos en JimmyCloud</h2>
+
+  <button mat-raised-button color="primary" (click)="fileInput.click()">
+    <mat-icon>upload</mat-icon> Subir archivo
+  </button>
+  <input
+    type="file"
+    #fileInput
+    hidden
+    (change)="onArchivoSeleccionado($event)"
+  />
+
+  <button mat-button color="warn" (click)="cerrarSesion()">
+    <mat-icon>logout</mat-icon> Cerrar sesión
+  </button>
+</div>
+
+<div class="file-container">
+  <div *ngIf="files.length === 0" class="empty">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Cargando archivos o no hay ninguno aún.</p>
+  </div>
+
+  <div class="grid">
+    <mat-card *ngFor="let file of files" class="file-card">
+  <mat-card-header>
+    <mat-icon mat-card-avatar>insert_drive_file</mat-icon>
+    <mat-card-title>{{ file.name }}</mat-card-title>
+    <mat-card-subtitle>{{ file.size | number }} bytes</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p><strong>Tipo:</strong> {{ file.type }}</p>
+    <p><strong>Modificado:</strong> {{ file.modifiedAt | date:'short' }}</p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="descargarArchivo(file.name)">
+      <mat-icon>download</mat-icon> Descargar
+    </button>
+    <button mat-button color="warn" (click)="eliminarArchivo(file.name)">
+      <mat-icon>delete</mat-icon> Eliminar
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+  </div>
+</div>
+
+
