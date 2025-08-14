@@ -36,7 +36,7 @@ export class ListComponent implements OnInit {
 
     this.ftpService.listFiles(this.userApp).subscribe({ 
       next: data => {
-        console.log('Archivos recibidos del servidor:', data);  // 👈 Aquí
+        //console.log('Archivos recibidos del servidor:', data);  // 👈 Aquí
         this.files = data;
       },
       error: err => console.error('Error al obtener archivos:', err)

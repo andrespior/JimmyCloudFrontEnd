@@ -1,21 +1,57 @@
+/* Estilos SCSS para login */
 .login-wrapper {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(to right, #3f51b5, #5c6bc0);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 16px;
 }
 
 .login-card {
   width: 100%;
   max-width: 400px;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  background-color: #fff;
+  padding: 24px 32px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  background-color: #ffffffcc;
+  backdrop-filter: blur(8px);
+  transition: box-shadow 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.login-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin-bottom: 24px;
+  user-select: none;
 }
 
 .full-width {
   width: 100%;
   margin-bottom: 20px;
+}
+
+.login-button {
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 12px 0;
+  border-radius: 8px;
+  transition: background-color 0.25s ease;
+
+  &:disabled {
+    background-color: #a5a5a5 !important;
+    color: #eee !important;
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 20px 16px;
+  }
 }

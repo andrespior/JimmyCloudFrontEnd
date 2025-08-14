@@ -1,10 +1,10 @@
 <div class="header">
   <div class="header-left">
-    <h2 class="title">JimmyCloud</h2>
+    <h2 class="title" aria-label="Nombre de la plataforma">📁 JimmyCloud</h2>
   </div>
 
   <div class="header-right">
-    <button mat-raised-button color="primary" (click)="fileInput.click()">
+    <button mat-raised-button color="primary" (click)="fileInput.click()" aria-label="Subir archivo">
       <mat-icon>upload</mat-icon> Subir
     </button>
 
@@ -13,44 +13,43 @@
       #fileInput
       hidden
       (change)="onArchivoSeleccionado($event)"
+      aria-hidden="true"
     />
 
-    <button mat-stroked-button color="warn" (click)="cerrarSesion()">
+    <button mat-stroked-button color="warn" (click)="cerrarSesion()" aria-label="Cerrar sesión">
       <mat-icon>logout</mat-icon> Salir
     </button>
   </div>
 </div>
 
-
-<div class="file-container">
+<div class="file-container" role="region" aria-label="Lista de archivos">
   <div *ngIf="files.length === 0" class="empty-state">
     <mat-icon class="empty-icon">cloud_off</mat-icon>
     <p class="empty-text">No hay archivos disponibles.</p>
   </div>
 
-  <div class="grid">
-    <mat-card *ngFor="let file of files" class="file-card">
-    <mat-card-header>
-       <mat-icon mat-card-avatar>insert_drive_file</mat-icon>
-       <mat-card-title>{{ file.name }}</mat-card-title>
-      <mat-card-subtitle>{{ file.size | number }} bytes</mat-card-subtitle>
-    </mat-card-header>
-  <mat-card-content>
-    <p><strong>Tipo:</strong> {{ file.type }}</p>
-    <p><strong>Modificado:</strong> {{ file.modifiedAt | date:'short' }}</p>
-    <p><strong>Url:</strong> {{file.url}}</p>
-  </mat-card-content>
+  <div class="grid" *ngIf="files.length > 0">
+    <mat-card *ngFor="let file of files" class="file-card" tabindex="0" aria-disabled="true">
+      <mat-card-header>
+        <mat-icon mat-card-avatar aria-hidden="true">insert_drive_file</mat-icon>
+        <mat-card-title>{{ file.name }}</mat-card-title>
+        <mat-card-subtitle>{{ file.size | number }} bytes</mat-card-subtitle>
+      </mat-card-header>
 
-  <mat-card-actions>
-    <button mat-button color="primary" (click)="descargarArchivo(file.name)">
-      <mat-icon>download</mat-icon> Descargar
-    </button>
-    <button mat-button color="warn" (click)="eliminarArchivo(file.name)">
-      <mat-icon>delete</mat-icon> Eliminar
-    </button>
-  </mat-card-actions>
-  </mat-card>
+      <mat-card-content>
+        <p><strong>Tipo:</strong> {{ file.type }}</p>
+        <p><strong>Modificado:</strong> {{ file.modifiedAt | date:'short' }}</p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="descargarArchivo(file.name)" aria-disabled="true">
+          <mat-icon>download</mat-icon> Descargar
+        </button>
+        <button mat-button color="warn" (click)="eliminarArchivo(file.name)" aria-disabled="true">
+          <mat-icon>delete</mat-icon> Eliminar
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>
-
 
