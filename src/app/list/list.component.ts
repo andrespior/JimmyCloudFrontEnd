@@ -34,8 +34,11 @@ export class ListComponent implements OnInit {
       }
     }
 
-    this.ftpService.listFiles(this.userApp).subscribe({
-      next: data => this.files = data,
+    this.ftpService.listFiles(this.userApp).subscribe({ 
+      next: data => {
+        console.log('Archivos recibidos del servidor:', data);  // 👈 Aquí
+        this.files = data;
+      },
       error: err => console.error('Error al obtener archivos:', err)
     });
   }
@@ -61,7 +64,7 @@ export class ListComponent implements OnInit {
       this.ftpService.subirArchivo(archivo, user).subscribe({
         next: () => {
           alert('Archivo subido correctamente');
-          //this.obternetArchivos(); // refresca lista
+          this.obternetArchivos(); // refresca lista
         },
         error: err => {
           console.error('Error al subir archivo:', err);

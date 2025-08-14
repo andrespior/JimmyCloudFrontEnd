@@ -1,20 +1,29 @@
 // ftp.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({ providedIn: 'root' })
 export class FtpService {
+  constructor(private http: HttpClient) {}
   private apiUrl = 'http://localhost:3000'; // Cambia si usas otro puerto/backend
 
-  constructor(private http: HttpClient) {}
+  login(user: { username: string; password: string }) {
+    const secretKey = '5ecf6fd301f27a5f91d2502d5342075aa4dfee0db9a3feabf24bcc485d710df3c8e7d301cee592cf59b1ba17b6a6ad96e7acfd284bf9bfcfff7f128e9fee04cc';
+    const encryptedUser = CryptoJS.AES.encrypt(JSON.stringify(user), secretKey).toString();
 
-  login(user: { username: string; password: string }){
-    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, user);
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { payload: encryptedUser }).pipe(
+      tap((response) => {
+        this.guardarToken(response.token, user.username, user.password);
+      })
+    );
   }
 
   listFiles(user: { username: string; password: string }): Observable<any[]> {
-    return this.http.post<any[]>(`${this.apiUrl}/ftp/list`,user);
+    const secretKey = '5ecf6fd301f27a5f91d2502d5342075aa4dfee0db9a3feabf24bcc485d710df3c8e7d301cee592cf59b1ba17b6a6ad96e7acfd284bf9bfcfff7f128e9fee04cc';
+    const encryptedUser = CryptoJS.AES.encrypt(JSON.stringify(user), secretKey).toString();
+    return this.http.post<any[]>(`${this.apiUrl}/ftp/list`,{ payload: encryptedUser });
   }
 
   subirArchivo( file: File, user: { username: string; password: string }): Observable<any> {
@@ -42,13 +51,9 @@ export class FtpService {
     });
   }
 
-  guardarToken(token: string) {
+  guardarToken(token: string, user: string, pas: string) {
     localStorage.setItem('token', token);
-  }
-
-  guardarLogin(user: string, pas: string){
     localStorage.setItem('dato1', user);
     localStorage.setItem('dato2', pas);
   }
-
 }

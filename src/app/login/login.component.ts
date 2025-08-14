@@ -28,8 +28,7 @@ export class LoginComponent {
   onLogin() {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
-      // Aquí podrías llamar a un servicio de autenticación
-      // Simulación de login (puedes cambiarlo por llamada a API)
+
       if (username != '' && password != '') {
         const user = {
           username: username,
@@ -38,11 +37,7 @@ export class LoginComponent {
 
         this.ftpService.login(user).subscribe({
           next: (response) => {
-            this.ftpService.guardarToken(response.token);
-            //sessionStorage.setItem('ftpUser', JSON.stringify({ username: user.username, password: user.password }));
-            this.ftpService.guardarLogin(user.username, user.password);
-
-            this.router.navigate(['/home']); // redirige donde necesites
+            this.router.navigate(['/home']);
           },
           error: (err) => {
             console.error(err);
