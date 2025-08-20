@@ -1,5 +1,5 @@
 {
-  "name": "cloud-app",
+  "name": "jimmyCloud",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -20,6 +20,9 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@capacitor/android": "^7.4.2",
+    "@capacitor/cli": "^7.4.2",
+    "@capacitor/core": "^7.4.2",
     "basic-ftp": "^5.0.5",
     "cors": "^2.8.5",
     "crypto-js": "^4.2.0",

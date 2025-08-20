@@ -41,6 +41,9 @@
         <mat-error *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es obligatoria</mat-error>
       </mat-form-field>
 
+      <!-- recordar usuario -->
+      <mat-checkbox formControlName="rememberMe">Recordar usuario</mat-checkbox>
+
       <button
         mat-raised-button
         color="primary"
@@ -50,6 +53,8 @@
       >
         Ingresar
       </button>
+
+      
     </form>
   </mat-card>
 </div>

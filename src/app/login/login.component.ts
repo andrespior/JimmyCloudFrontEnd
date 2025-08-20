@@ -21,9 +21,21 @@ export class LoginComponent {
               private ftpService: FtpService) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      rememberMe: [false]
     });
   }
+
+  ngOnInit(): void {
+  const rememberedUser = localStorage.getItem('dato1');
+  const rememberedpass = localStorage.getItem('dato2');
+
+  this.loginForm = this.fb.group({
+    username: [rememberedUser || '', Validators.required],
+    password: [rememberedpass || '', Validators.required],
+    rememberMe: [!!rememberedUser]
+  });
+}
 
   onLogin() {
     if (this.loginForm.valid) {

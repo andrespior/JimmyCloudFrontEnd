@@ -23,6 +23,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatProgressSpinnerModule,
     MatInputModule,
     MatFormFieldModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
